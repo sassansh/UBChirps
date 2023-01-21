@@ -1,10 +1,55 @@
+import {useState} from "react";
+
 export default function Login() {
-  /**
-   * This is a login page. It will use OAuth + send messages to the backend.
-   */
-  return (
-    <div>
-      <p>this is the login page!!!</p>
-    </div>
+
+    const [user, setUser] = useState({
+        Username: '',
+        Password: ''
+    });
+
+    function handleNameInput(input){
+        setUser({
+            ...user,
+            Username: input.target.value
+        });
+    }
+
+    function handlePasswordInput(input){
+        setUser({
+            ...user,
+            Password: input.target.value
+        });
+    }
+
+    function handleSubmit(input) {
+        // TODO: Handle user login
+        console.log("user trying to login");
+    }
+
+    return (
+    <form onSubmit={handleSubmit}>
+      <label>
+          UBChirps
+      </label>
+
+        <label>
+            Username:
+            <input
+            value={user.Username}
+            onChange={handleNameInput}
+            />
+        </label>
+
+        <label>
+            Password:
+            <input
+                value={user.Password}
+                onChange={handlePasswordInput}
+            />
+        </label>
+
+        <button type="submit">Login</button>
+
+    </form>
   );
 }
