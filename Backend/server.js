@@ -7,3 +7,8 @@ app.listen(process.env.PORT || 8000)
 app.all('/', (req, res) => {
     res.send('UBC Chirp Chirp')
 })
+
+app.all('/posts', (req, res) => {
+    res.send("These are posts")
+});
+
