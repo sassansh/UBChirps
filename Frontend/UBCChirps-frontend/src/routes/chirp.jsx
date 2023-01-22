@@ -12,14 +12,11 @@ function ChirpTextbox() {
     const [message, setMessage] = useState('Enter your message here');
 
     return(
-      <>
-      <Navbar/>
         <input
             type = "text"
             value = {message}
             onChange = {m => setMessage(m.target.value)}
         />
-      </>
     );
 
 }
