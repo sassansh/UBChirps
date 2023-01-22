@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
+import './chirp.css';
 
 function ChirpButton() {
     return (
-        <chirpButton>Chirp</chirpButton>
+        <button>Chirp</button>
     );
 }
 
@@ -11,8 +12,8 @@ function ChirpTextbox() {
     const [message, setMessage] = useState('Enter your message here');
 
     return(
-        <input
-            type = "text"
+        <textarea
+            className = "myTextBox"
             value = {message}
             onChange = {m => setMessage(m.target.value)}
         />
@@ -37,7 +38,6 @@ export default function Chirp() {
   return (
     <div>
       <h2>Chirp your message!</h2>
-
         <ChirpTextbox />
         <ChirpButton />
     </div>
