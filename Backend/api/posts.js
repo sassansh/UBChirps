@@ -78,8 +78,11 @@ async function findPostsByUser(googleId) {
 
 // ROUTES:
 router.post("/add", async (req, res) => {
+  // console.log(req);
   const post = req.body;
   const user = req.user;
+  console.log(post);
+  console.log(user);
   const response = await createPost(post, user).catch(console.err);
   res.send({ data: response });
 });

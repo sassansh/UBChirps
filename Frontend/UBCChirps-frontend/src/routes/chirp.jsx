@@ -1,35 +1,48 @@
 import Navbar from "../components/navbar";
-import React, {useState} from 'react';
-import './chirp.css';
+import React, { useState } from "react";
+import "./chirp.css";
 
-function ChirpButton() {
-    return (
-        <button className = {'chirpButton'}>Chirp</button>
-    );
+function handleSubmit(message) {
+  async function postData(url = "", data = {}) {
+    const response = await fetch(url, {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      body: data, // body data type must match "Content-Type" header
+    });
+    console.log("you sent a chirp");
+    console.log(response.json());
+  }
+
+  postData("http://localhost:8000/posts/add", { content: message });
 }
 
-
-function ChirpTextbox() {
-    const [message, setMessage] = useState('Enter your message here');
-
-    return(
-
-        <textarea
-            className = "myTextBox"
-            value = {message}
-            onChange = {m => setMessage(m.target.value)}
-        />
-
-    );
-
+function ChirpButton(props) {
+  return (
+    <button
+      className={"chirpButton"}
+      onClick={() => {
+        props.handleClick(props.message);
+      }}
+    >
+      Chirp
+    </button>
+  );
 }
 
+function ChirpTextbox(props) {
+  return (
+    <textarea
+      className="myTextBox"
+      value={props.message}
+      onChange={(m) => props.setMessage(m.target.value)}
+    />
+  );
+}
 
 export default function Chirp() {
   /**
    * ON this page you should be able to see (when logged in) an input box and be able
    * to send off a 'Chirp' (Tweet) to the server
-   * 
+   *
    * Don't worry about authentication when building this page.
    */
 
@@ -38,14 +51,16 @@ export default function Chirp() {
   //     "username": "user1",
   //     "content": "Hello World",
   //  }
+  const [message, setMessage] = useState("Enter your message here");
+
   return (
     <>
-    <Navbar/>
-    <div>
-      <h2>Chirp your message!</h2>
-        <ChirpTextbox />
-        <ChirpButton />
-    </div>
+      <Navbar />
+      <div>
+        <h2>Chirp your message!</h2>
+        <ChirpTextbox message={message} setMessage={setMessage} />
+        <ChirpButton handleClick={handleSubmit} />
+      </div>
     </>
   );
 }
