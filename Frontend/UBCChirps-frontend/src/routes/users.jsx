@@ -61,7 +61,9 @@ export default function UserPage() {
   return (
     <div>
       <Navbar />
+
       <ChirpList chirps={chirpData} />
+
     </div>
   );
 }
@@ -78,7 +80,7 @@ function ChirpList(props) {
 
 function SingleChirp(props) {
   return (
-    <div style={{ border: '1px solid red' }}>
+    <div style={{ border: '1px solid red'}}>
       <p>{props.content}</p>
       <p>{props.timestamp}</p>
     </div>

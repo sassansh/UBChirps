@@ -2,6 +2,7 @@ import {useState} from "react";
 import Navbar from "../components/navbar";
 import "../routes/login.css"
 
+
 export default function Login() {
 
     const [user, setUser] = useState({
@@ -63,7 +64,7 @@ export default function Login() {
 
     function handleSubmit(input) {
         // TODO: Handle user login
-        console.log("user trying to login");
+        console.log("Invalid login: User not found :(");
     }
 
     return (<>
@@ -95,7 +96,14 @@ export default function Login() {
         </label>
         </div>
 
-        <div><button type="submit">Login</button></div>
+        <div>
+            <button
+            className={"loginButton"}
+            type="submit"
+            >
+            Login
+            </button>
+        </div>
 
     </form>
     

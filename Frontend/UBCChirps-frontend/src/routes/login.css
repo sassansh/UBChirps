@@ -20,11 +20,10 @@ h2 {
     left: 37%;
 }
 
-button {
+.loginButton {
     text-align: center;
     position: absolute;
     top: 65%;
     left: 50%;
     margin-right: -50%;
-    transform: translate(-50%, -50%);
 }
