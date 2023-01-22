@@ -57,6 +57,21 @@ async function findOnePost(id) {
   }
 }
 
+async function findPostsByUser(googleId) {
+  try {
+    const db = establishConnection();
+    const post = (await db).collection("posts").find({ googleId: googleId});
+    const postArray = await post.toArray();
+    if (postArray) {
+      return postArray;
+    } else {
+      return {};
+    }
+  } catch (err) {
+    console.log(err.stack);
+  }
+}
+
 // ROUTES:
 router.post("/add", async (req, res) => {
   const content = req.body;
@@ -73,10 +88,19 @@ router.get("/getOne", async (req, res) => {
 });
 
 router.get("/getAll", async (req, res) => {
+  console.log(req.user);
   const response = {
     data: await findAllPosts().catch(console.err),
   };
   res.send(response);
 });
+
+router.get("/getPostsByUser", async (req, res) => {
+  const response = {
+    data: await findPostsByUser().catch(console.err),
+  };
+  console.log(response);
+  res.send(response);
+})
 
 module.exports = router;
