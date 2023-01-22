@@ -2,42 +2,30 @@ import { Outlet, Link, useLoaderData } from "react-router-dom";
 import Navbar from "../components/navbar";
 
 export async function getData(id) {
-  /**
-   * We will recieve a list of posts in the form
-   * {
-   "id": 1,
-   "username": "user1",
-   "content": "Hello World",
-   "timestamp": "2020-01-01 00:00:00"
-  }
-   */
-  console.log("we're fetching the id!! (not really)");
-  console.log("the id is: " + id);
-  const fakeChirps = [
-    {
-      id: 3,
-      username: "gav",
-      content: "Third!!!",
-      timestamp: "2022-01-01 00:00:00",
-    },
-    {
-      id: 1,
-      username: "gav",
-      content: "Second chirp!!!",
-      timestamp: "2022-01-01 00:00:00",
-    },
-    {
-      id: 2,
-      username: "gav",
-      content: "This is my first chirp!!!",
-      timestamp: "2020-01-01 00:00:00",
-    },
-  ];
-  return fakeChirps;
+  // const fakeChirps = [
+  //   {
+  //      "_id":"63cc6e8f06d035300be86a58",
+  //      "title":"Yo whatsup",
+  //      "date":"2022-10-09T18:12:13.000Z",
+  //      "content":"Lorem Ipsum Blah k ijk qwhfue sql fhisub fsdbih s"
+  //   },
+  //   {
+  //      "_id":"63cc6e9006d035300be86a59",
+  //      "title":"10 step guide to achieving clear and flawless skin",
+  //      "date":"2022-10-09T18:12:13.000Z",
+  //      "content":"Lorem Ipsum Blah k ijk qwhfue sql fhisub fsdbih s"
+  //   },
+  //   {
+  //      "_id":"63cc71d5a05941aebf22e570",
+  //      "title":"10 step guide to achieving clear and flawless skin",
+  //      "date":"2022-10-09T18:12:13.000Z",
+  //      "content":"Lorem Ipsum Blah k ijk qwhfue sql fhisub fsdbih s"
+  //   }];
+  // return fakeChirps;
   // await fakeNetwork(`contact:${id}`);
-  // let contacts = await localforage.getItem("contacts");
-  // let contact = contacts.find(contact => contact.id === id);
-  // return contact ?? null;
+  const posts = await fetch(`localhost:8000/getPostsByUser/?_googleid=${id}`);
+  console.log(posts);
+  return(posts ?? null);
 }
 
 export async function loader({ params }) {
@@ -71,9 +59,13 @@ export default function UserPage() {
 function ChirpList(props) {
   return (
     <>
-      {props.chirps.map((x) => (
-        <SingleChirp content={x.content} timestamp={x.timestamp} />
-      ))}
+      {
+      
+      props? props.chirps.map((x) => (
+        <SingleChirp content={x.content} timestamp={x.date} />
+      )) : <></>
+      
+      }
     </>
   );
 }
