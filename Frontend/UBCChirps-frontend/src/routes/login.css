@@ -1,30 +1,26 @@
-h2 {
-    color: crimson;
-    text-align: center;
-    position: absolute;
-    top: 27%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
+img {
+    width: 300px;
 }
 
-.user {
-    position: absolute;
-    top: 40%;
-    left: 37%;
+.image {
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
+   
 
 .password {
-    position: absolute;
-    top: 50%;
-    left: 37%;
+    
+}
+
+body {
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 button {
     text-align: center;
-    position: absolute;
-    top: 65%;
-    left: 50%;
-    margin-right: -50%;
     transform: translate(-50%, -50%);
 }

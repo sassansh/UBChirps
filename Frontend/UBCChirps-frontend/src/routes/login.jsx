@@ -68,12 +68,11 @@ export default function Login() {
 
     return (<>
     <Navbar/>
+    <div className="image">
+        <img src="/logo.png" alt="logo" />
+    </div>
     <form onSubmit={handleSubmit}>
-        <div>
-        <h2>
-          UBChirps
-        </h2>
-        </div>
+        
 
         <div>
         <label
