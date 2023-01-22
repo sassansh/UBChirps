@@ -71,13 +71,13 @@ app.all('/', (req, res) => {
     res.send('UBC Chirp Chirp')
 })
 
-app.all('/posts/add', async(req, res) => {
+app.post('/posts/add', async(req, res) => {
     const content = req.body;
     const response = await createPost(content).catch(console.err)
     res.send({"data": response})
 })
 
-app.all('/posts/getOne', async(req, res) => {
+app.get('/posts/getOne', async(req, res) => {
     const _id = req.query._id;
     const response = {
         "data": await findOnePost(_id).catch(console.err)
@@ -85,7 +85,7 @@ app.all('/posts/getOne', async(req, res) => {
     res.send(response);
 })
 
-app.all('/posts/getAll', async(req, res) => {
+app.get('/posts/getAll', async(req, res) => {
     const response = {
         "data": await findAllPosts().catch(console.err)
     };
