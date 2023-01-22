@@ -59,16 +59,24 @@ router.get(
 router.get(
   "/auth/google/callback",
   passport.authenticate("google", {
-    failureRedirect: "http://localhost:8000/failLogin",
+    failureRedirect: "/login",
   }),
   function (req, res) {
-    // Successful authentication, redirect secrets.
-    res.redirect("http://localhost:8000/successLogin");
+    res.redirect("/user/" + req.user.username);
   }
 );
 
-router.get("/logout", function (req, res) {
-  res.redirect("http://localhost:8000/");
+router.get("/logout", (req, res) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/login");
+  });
+});
+
+router.get("/current_user", (req, res) => {
+  res.send(req.user);
 });
 
 module.exports = router;
