@@ -6,14 +6,11 @@ export default function Root() {
    */
   
   return (
-    <div>
+    <>
       <Navbar/>
-      <p>this is the root!!!</p>
-      <div className="feed">
-        <div className="feed__header">
-          <h2>"Home"</h2>
-        </div>
+      <div className="pageOuter">
+      <h1>Hi, welcome to UBChirps.</h1>
       </div>
-    </div>
+    </>
   );
 }

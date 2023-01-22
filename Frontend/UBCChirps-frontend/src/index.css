@@ -1,3 +1,72 @@
+/* added */
+.chirpList{
+  overflow-y:auto;
+}
+
+.chirp{
+  background-color: white;
+  border-radius: 0.3em;
+  margin: 0.2em;
+  width: 25em;
+  border:3px solid #988f6c;
+  /* min-width: 300px; */
+  /* max-width: 500px; */
+}
+
+.chirpButton{
+margin:1vw;
+}
+
+.myTextBox{
+  width: 30vw;
+  height: 8vw;
+}
+
+.pageOuter{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+ul.navbarlist {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  list-style-type: none;
+}
+
+li.navbarelement{
+  padding: 1vw;
+}
+
+.navbar{
+    /* position: fixed; */
+    /* top: 0px; */
+    background-color: #988f6c;
+    width: 100vw;
+    /* height: 10vh; */
+    margin-bottom: 20px;
+}
+
+a { 
+  color: #000000;
+  text-decoration: none;
+}
+
+body {
+  background-color: cornsilk;
+}
+
+h2 {
+  color: crimson;
+}
+
+.navbarbutton{
+  background-color: cornsilk;
+}
+
+/* from create vite */
 html {
   box-sizing: border-box;
 }
@@ -100,8 +169,9 @@ form[action$="destroy"] button {
   display: flex;
   height: 100%;
   width: 100%;
-  justify-content: space-evenly;
+  justify-content: start;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 #sidebar {

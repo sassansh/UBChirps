@@ -8,11 +8,13 @@ const Search = () => {
   const [users, setUsers] = useState([])
 
   return (
-    <div className="search-page">
+    <>
         <Navbar />
+        <div className='pageOuter'>
         <SearchBar setUsers={setUsers}/>
         <SearchResult users={users} />
-    </div>
+        </div>
+    </>
   )
 }
 
@@ -33,7 +35,7 @@ const SearchBar = ({setUsers}) => {
 
     return (
       <div style={{padding:20}}>
-        <h4>Search User</h4>
+        <h2>Search User</h2>
         <form style={{display:"flex"}} onSubmit={(e) => handleSubmit(e)} action="submit">
             <input ref={inputRef} type="text" />
             <button onSubmit={(e) => handleSubmit(e)}>Submit</button>

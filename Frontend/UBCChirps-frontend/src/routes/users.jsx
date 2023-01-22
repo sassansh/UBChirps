@@ -20,32 +20,32 @@ export default function UserPage() {
   // ideally we should asynchronously load the chirp data and stuff...
   const chirpData = useLoaderData();
   return (
-    <div>
-      <Navbar />
-
+    <>
+    <Navbar />
+    <div className='pageOuter'>
       <ChirpList chirps={chirpData} />
-
     </div>
+    </>
   );
 }
 
 function ChirpList(props) {
   return (
-    <>
+    <div className="chirpList">
       {props ? (
-        props.chirps.map((x) => (
+        props.chirps.slice(0).reverse().map((x) => (
           <SingleChirp content={x.content} timestamp={x.date} key = {x._id}/>
         ))
       ) : (
         <></>
       )}
-    </>
+    </div>
   );
 }
 
 function SingleChirp(props) {
   return (
-    <div style={{ border: "1px solid red" }}>
+    <div className = 'chirp'>
       <p>{props.content}</p>
       <p>{props.timestamp}</p>
     </div>

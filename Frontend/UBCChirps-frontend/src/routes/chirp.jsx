@@ -1,6 +1,5 @@
 import Navbar from "../components/navbar";
 import React, { useState } from "react";
-import "./chirp.css";
 
 function handleSubmit(message) {
   console.log(message);
@@ -67,7 +66,7 @@ export default function Chirp() {
   return (
     <>
       <Navbar />
-      <div>
+      <div className="pageOuter">
         <h2>Chirp your message!</h2>
         <ChirpTextbox message={message} setMessage={setMessage} />
         <ChirpButton handleClick={handleSubmit} message = {message} />

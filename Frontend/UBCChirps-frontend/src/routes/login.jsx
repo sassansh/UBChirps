@@ -1,5 +1,3 @@
-import "../routes/login.css";
-
 import Navbar from "../components/navbar";
 import { useState } from "react";
 
@@ -7,6 +5,7 @@ export default function Login() {
   return (
     <>
       <Navbar />
+      <div className = "pageOuter">
       <form action="http://localhost:8000/auth/google">
         <button type="submit" className="google-button">
           <span className="google-button__icon">
@@ -35,6 +34,7 @@ export default function Login() {
           <span className="google-button__text">Sign in with Google</span>
         </button>
       </form>
+      </div>
     </>
   );
 }
