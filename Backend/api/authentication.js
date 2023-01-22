@@ -62,7 +62,6 @@ router.get(
     failureRedirect: "/login",
   }),
   function (req, res) {
-    // Successful authentication, redirect secrets.
     res.redirect("/user/" + req.user.username);
   }
 );
