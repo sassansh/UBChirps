@@ -25,9 +25,9 @@ async function createPost(post, user) {
     console.log(post);
     console.log(user);
     // Construct a post
-    const postContent = {"googleId": userId, "date": new Date(2022, 03, 03), "content": post};
+    const postContent = {"googleId": userId, "date": new Date(2022, 03, 03), "content": post.content};
     const p = await posts.insertOne(postContent);
-    
+    return ("ayyyy successful");
   } catch (err) {
     console.log(err.stack);
   } finally {
@@ -79,7 +79,8 @@ async function findPostsByUser(googleId) {
 // ROUTES:
 router.post("/add", async (req, res) => {
   const post = req.body;
-  const user = req.user;
+  const user = req.user || {googleId: "111111111111"};
+  console.log(user);
   const response = await createPost(post, user).catch(console.err);
   res.send({ data: response });
 });
