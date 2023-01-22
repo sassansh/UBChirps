@@ -27,7 +27,7 @@ async function createPost(post, user) {
     // Construct a post
     const postContent = {"googleId": userId, "date": new Date(2022, 03, 03), "content": post};
     const p = await posts.insertOne(postContent);
-    return p;
+    
   } catch (err) {
     console.log(err.stack);
   } finally {
