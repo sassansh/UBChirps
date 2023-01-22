@@ -19,6 +19,9 @@ export default function Navbar() {
         <li>
             <Link to={"../chirp"}>write a chirp</Link>
         </li>
+        <li>
+            <Link to={"../search"}>search a user</Link>
+        </li>
 
       </ul>
     </div>

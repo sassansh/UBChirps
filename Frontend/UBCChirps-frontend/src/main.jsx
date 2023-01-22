@@ -12,6 +12,7 @@ import Chirp from "./routes/chirp.jsx";
 import{
   loader as chirpLoader,
 } from "./routes/users";
+import Search from "./routes/search";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: "/chirp",
     element: <Chirp/>,
+  },
+  {
+    path: "/search",
+    element: <Search/>,
   },
 ]);
 
