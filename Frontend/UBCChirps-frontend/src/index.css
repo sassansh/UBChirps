@@ -101,6 +101,7 @@ form[action$="destroy"] button {
   height: 100%;
   width: 100%;
   justify-content: space-evenly;
+  flex-direction: column;
 }
 
 #sidebar {
