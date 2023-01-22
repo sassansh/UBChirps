@@ -1,5 +1,5 @@
 const express = require('express');
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 const dotenv = require('dotenv');
 dotenv.config();
 console.log(`Your port is ${process.env.PORT}`); 
@@ -57,20 +57,43 @@ async function findAllPosts() {
 
 }
 
+async function findOnePost(id) {
+    try {
+        const db = establishConnection();
+        const post = (await db).collection("posts").find({_id: ObjectId(id)});
+        const postArray = await post.toArray();
+        console.log(postArray);
+        if (postArray) {
+            return postArray[0];
+        }
+        else {
+            return {};
+        }
+
+    } catch (err) {
+        console.log(err.stack);
+    }
+}
+
 // ROUTES:
 app.all('/', (req, res) => {
     res.send('UBC Chirp Chirp')
 })
 
-app.all('/posts', (req, res) => {
-    res.send('POSTS')
-})
-
-app.all('/add', (req, res) => {
+app.all('/posts/add', (req, res) => {
     createPost().catch(console.err)
 })
 
-app.all('/find', async(req, res) => {
+app.all('/posts/getOne', async(req, res) => {
+    console.log(req.query);
+    const _id = req.query._id;
+    const response = {
+        "data": await findOnePost(_id).catch(console.err)
+    }; 
+    res.send(response);
+})
+
+app.all('/posts/getAll', async(req, res) => {
     const response = {
         "data": await findAllPosts().catch(console.err)
     };
