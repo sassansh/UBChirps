@@ -1,3 +1,4 @@
+import Navbar from "../components/navbar";
 import React, {useState} from 'react';
 import './chirp.css';
 
@@ -38,10 +39,13 @@ export default function Chirp() {
   //     "content": "Hello World",
   //  }
   return (
+    <>
+    <Navbar/>
     <div>
       <h2>Chirp your message!</h2>
         <ChirpTextbox />
         <ChirpButton />
     </div>
+    </>
   );
 }

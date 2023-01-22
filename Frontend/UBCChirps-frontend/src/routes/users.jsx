@@ -1,4 +1,5 @@
 import { Outlet, Link, useLoaderData } from "react-router-dom";
+import Navbar from "../components/navbar";
 
 export async function getData(id) {
   /**
@@ -12,12 +13,31 @@ export async function getData(id) {
    */
   console.log("we're fetching the id!! (not really)");
   console.log("the id is: " + id);
-  const fakeUserData = { name: "Gavin George", urlExtension: id};
-  return fakeUserData;
+  const fakeChirps = [
+    {
+      id: 3,
+      username: "gav",
+      content: "Third!!!",
+      timestamp: "2022-01-01 00:00:00",
+    },
+    {
+      id: 1,
+      username: "gav",
+      content: "Second chirp!!!",
+      timestamp: "2022-01-01 00:00:00",
+    },
+    {
+      id: 2,
+      username: "gav",
+      content: "This is my first chirp!!!",
+      timestamp: "2020-01-01 00:00:00",
+    },
+  ];
+  return fakeChirps;
   // await fakeNetwork(`contact:${id}`);
   // let contacts = await localforage.getItem("contacts");
   // let contact = contacts.find(contact => contact.id === id);
-  // return contact ?? null; 
+  // return contact ?? null;
 }
 
 export async function loader({ params }) {
@@ -30,15 +50,37 @@ export async function loader({ params }) {
  * at a url like: UBChirp/chirp/Gavin
  * we will see all of gavin's chirps
  */
+
+// {/* <p>this is the users page!!!</p>
+//       <p>user Name: {chirpData.name}</p>
+//       <p>urlExtension: {chirpData.urlExtension}</p>
+//       <p> these are all of {chirpData.name}'s chirps</p> */}
 export default function UserPage() {
   // ideally we should asynchronously load the chirp data and stuff...
   const chirpData = useLoaderData();
   return (
     <div>
-      <p>this is the users page!!!</p>
-      <p>user Name: {chirpData.name}</p>
-      <p>urlExtension: {chirpData.urlExtension}</p>
-      <p> these are all of {chirpData.name}'s chirps</p>
+      <Navbar />
+      <ChirpList chirps={chirpData} />
+    </div>
+  );
+}
+
+function ChirpList(props) {
+  return (
+    <>
+      {props.chirps.map((x) => (
+        <SingleChirp content={x.content} timestamp={x.timestamp} />
+      ))}
+    </>
+  );
+}
+
+function SingleChirp(props) {
+  return (
+    <div style={{ border: '1px solid red' }}>
+      <p>{props.content}</p>
+      <p>{props.timestamp}</p>
     </div>
   );
 }
