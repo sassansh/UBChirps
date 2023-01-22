@@ -11,34 +11,48 @@ const client = new MongoClient(url);
 
 const dbName = "test";
 
+ const establishConnection = async() => {
+    await client.connect();
+    console.log("Connected correctly to server");
+
+    return client.db(dbName);
+}
+
 app.listen(process.env.PORT)
 
-async function run() {
+const postObject = () => {
+    let post = {
+        "title": "Hi",
+        "date": new Date(2023, 01, 01, 01, 01, 01),
+        "content": "Hello, happy new year everyone. Hope we can all land FAANG internships this year!",
+    }
+    return post;
+}
+
+async function createPost() {
     try {
-        await client.connect();
-        console.log("Connected correctly to server");
-
-        const db = client.db(dbName);
-        const col = db.collection("posts");
-
+        const db = establishConnection();
+        const posts = (await db).collection("posts");
         // Construct a post                                                                                                                                                    
-        let post = {
-            "title": "10 step guide to achieving clear and flawless skin",
-            "date": new Date(2022, 09, 09, 11, 12, 13),
-            "content": "Lorem Ipsum Blah k ijk qwhfue sql fhisub fsdbih s",
-        }
-        const p = await col.insertOne(post);
-         // Find one document
-         const myDoc = await col.findOne();
-         // Print to the console
-         console.log(myDoc);
-
+        const post = postObject();
+        const p = await posts.insertOne(post);
     } catch (err) {
         console.log(err.stack);
     }
     finally {
         await client.close();
     }
+}
+
+async function findPost() {
+    try {
+        const db = establishConnection();
+        const posts = (await db).collection("posts");
+
+    } catch (err) {
+        console.log(err.stack);
+    }
+
 }
 
 // ROUTES:
@@ -51,5 +65,9 @@ app.all('/posts', (req, res) => {
 })
 
 app.all('/add', (req, res) => {
-    run().catch(console.err)
+    createPost().catch(console.err)
+})
+
+app.all('/find', (req, res) => {
+    findPost().catch(console.err)
 })
