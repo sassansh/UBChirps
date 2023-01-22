@@ -12,11 +12,13 @@ function ChirpTextbox() {
     const [message, setMessage] = useState('Enter your message here');
 
     return(
+
         <textarea
             className = "myTextBox"
             value = {message}
             onChange = {m => setMessage(m.target.value)}
         />
+
     );
 
 }
