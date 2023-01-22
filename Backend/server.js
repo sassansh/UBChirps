@@ -44,10 +44,17 @@ async function createPost() {
     }
 }
 
-async function findPost() {
+async function findAllPosts() {
     try {
         const db = establishConnection();
         const posts = (await db).collection("posts");
+
+        const p = await posts.find({});
+        const postArray = await p.toArray();
+        for (let post of postArray) {
+            console.log(post.title);
+        }
+        return postArray;
 
     } catch (err) {
         console.log(err.stack);
@@ -69,5 +76,6 @@ app.all('/add', (req, res) => {
 })
 
 app.all('/find', (req, res) => {
-    findPost().catch(console.err)
+    const response = {"data": JSON.stringify(findAllPosts().catch(console.err))}
+    res.send(response);
 })
