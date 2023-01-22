@@ -3,16 +3,26 @@ import React, { useState } from "react";
 import "./chirp.css";
 
 function handleSubmit(message) {
-  async function postData(url = "", data = {}) {
-    const response = await fetch(url, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      body: data, // body data type must match "Content-Type" header
-    });
-    console.log("you sent a chirp");
-    console.log(response.json());
-  }
+  console.log(message);
+  // async function postData(url = "", data) {
+  //   const data2 = {content: "this i scontent"}
+  //   const response = await fetch(url, {
+  //     method: "POST", // *GET, POST, PUT, DELETE, etc.
+  //     body: data2, // body data type must match "Content-Type" header
+  //   });
+  //   console.log("you sent a chirp");
+  //   console.log(response.json());
+  // }
 
-  postData("http://localhost:8000/posts/add", { content: message });
+  // postData("http://localhost:8000/posts/add", { content: message });
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content: message })
+  };
+  fetch('http://localhost:8000/posts/add', requestOptions);
+      // .then(response => response.json())
+      // .then(data => element.innerHTML = data.id );
 }
 
 function ChirpButton(props) {
@@ -59,7 +69,7 @@ export default function Chirp() {
       <div>
         <h2>Chirp your message!</h2>
         <ChirpTextbox message={message} setMessage={setMessage} />
-        <ChirpButton handleClick={handleSubmit} />
+        <ChirpButton handleClick={handleSubmit} message = {message} />
       </div>
     </>
   );
