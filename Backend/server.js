@@ -5,6 +5,7 @@ dotenv.config();
 console.log(`Your port is ${process.env.PORT}`); 
 
 const app = express();
+app.use(express.json());
 
 const url = process.env.MONGODB_URL;
 const client = new MongoClient(url);
@@ -20,22 +21,13 @@ const dbName = "test";
 
 app.listen(process.env.PORT)
 
-const postObject = () => {
-    let post = {
-        "title": "Hi",
-        "date": new Date(2023, 01, 01, 01, 01, 01),
-        "content": "Hello, happy new year everyone. Hope we can all land FAANG internships this year!",
-    }
-    return post;
-}
-
-async function createPost() {
+async function createPost(content) {
     try {
         const db = establishConnection();
         const posts = (await db).collection("posts");
         // Construct a post                                                                                                                                                    
-        const post = postObject();
-        const p = await posts.insertOne(post);
+        const p = await posts.insertOne(content);
+        return p
     } catch (err) {
         console.log(err.stack);
     }
@@ -62,7 +54,6 @@ async function findOnePost(id) {
         const db = establishConnection();
         const post = (await db).collection("posts").find({_id: ObjectId(id)});
         const postArray = await post.toArray();
-        console.log(postArray);
         if (postArray) {
             return postArray[0];
         }
@@ -80,12 +71,13 @@ app.all('/', (req, res) => {
     res.send('UBC Chirp Chirp')
 })
 
-app.all('/posts/add', (req, res) => {
-    createPost().catch(console.err)
+app.all('/posts/add', async(req, res) => {
+    const content = req.body;
+    const response = await createPost(content).catch(console.err)
+    res.send({"data": response})
 })
 
 app.all('/posts/getOne', async(req, res) => {
-    console.log(req.query);
     const _id = req.query._id;
     const response = {
         "data": await findOnePost(_id).catch(console.err)
