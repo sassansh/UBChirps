@@ -17,6 +17,7 @@ function handleSubmit(message) {
   // postData("http://localhost:8000/posts/add", { content: message });
     const requestOptions = {
       method: 'POST',
+      credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ content: message })
   };

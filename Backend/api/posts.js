@@ -22,8 +22,6 @@ async function createPost(post, user) {
     const userId = user.googleId;
     const db = establishConnection();
     const posts = (await db).collection("posts");
-    console.log(post);
-    console.log(user);
     // Construct a post
     const postContent = {"googleId": userId, "date": new Date(2022, 03, 03), "content": post.content};
     const p = await posts.insertOne(postContent);
@@ -80,8 +78,7 @@ async function findPostsByUser(googleId) {
 router.post("/add", async (req, res) => {
   // console.log(req);
   const post = req.body;
-  const user = req.user || {googleId: "111111111111"};
-  console.log(user);
+  const user = req.user;
   const response = await createPost(post, user).catch(console.err);
   res.send({ data: response });
 });
@@ -103,7 +100,7 @@ router.get("/getAll", async (req, res) => {
 });
 
 router.get("/getPostsByUser", async (req, res) => {
-  console.log(req.user)
+  // console.log(req.user)
   const response = {
     data: await findPostsByUser(req.query.googleId).catch(console.err),
   };
