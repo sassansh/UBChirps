@@ -47,13 +47,8 @@ async function createPost() {
 async function findAllPosts() {
     try {
         const db = establishConnection();
-        const posts = (await db).collection("posts");
-
-        const p = await posts.find({});
-        const postArray = await p.toArray();
-        for (let post of postArray) {
-            console.log(post.title);
-        }
+        const posts = (await db).collection("posts").find({});
+        const postArray = await posts.toArray();
         return postArray;
 
     } catch (err) {
@@ -75,7 +70,9 @@ app.all('/add', (req, res) => {
     createPost().catch(console.err)
 })
 
-app.all('/find', (req, res) => {
-    const response = {"data": JSON.stringify(findAllPosts().catch(console.err))}
+app.all('/find', async(req, res) => {
+    const response = {
+        "data": await findAllPosts().catch(console.err)
+    };
     res.send(response);
 })
