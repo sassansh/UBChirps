@@ -1,4 +1,5 @@
 import { Outlet, Link, useLoaderData } from "react-router-dom";
+import Navbar from "../components/navbar";
 
 export async function getData(id) {
   /**
@@ -35,6 +36,7 @@ export default function UserPage() {
   const chirpData = useLoaderData();
   return (
     <div>
+      <Navbar/>
       <p>this is the users page!!!</p>
       <p>user Name: {chirpData.name}</p>
       <p>urlExtension: {chirpData.urlExtension}</p>

@@ -1,3 +1,5 @@
+import Navbar from "../components/navbar";
+
 export default function Chirp() {
   /**
    * ON this page you should be able to see (when logged in) an input box and be able
@@ -12,8 +14,11 @@ export default function Chirp() {
   //     "content": "Hello World",
   //  }
   return (
+    <>
+    <Navbar/>
     <div>
       <p>this is where you can send chirps</p>
     </div>
+    </>
   );
 }
