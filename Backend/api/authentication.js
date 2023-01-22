@@ -62,7 +62,7 @@ router.get(
     failureRedirect: "/login",
   }),
   function (req, res) {
-    res.redirect("/user/" + req.user.username);
+    res.redirect("http://localhost:5173/user/" + req.user.username);
   }
 );
 
