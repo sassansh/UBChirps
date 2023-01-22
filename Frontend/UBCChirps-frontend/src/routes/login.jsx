@@ -4,7 +4,8 @@ export default function Login() {
 
     const [user, setUser] = useState({
         Username: '',
-        Password: ''
+        Password: '',
+        showPassword: false,
     });
 
     function handleNameInput(input){
@@ -21,6 +22,14 @@ export default function Login() {
         });
     }
 
+
+    function handleToggle() {
+        setUser({
+            ...user,
+            showPassword: !user.showPassword
+        });
+    }
+
     function handleSubmit(input) {
         // TODO: Handle user login
         console.log("user trying to login");
@@ -28,27 +37,40 @@ export default function Login() {
 
     return (
     <form onSubmit={handleSubmit}>
-      <label>
+        <div>
+        <h2>
           UBChirps
-      </label>
+        </h2>
+        </div>
 
+        <div>
         <label>
-            Username:
+            Username:{' '}
             <input
             value={user.Username}
             onChange={handleNameInput}
             />
         </label>
+        </div>
 
+        <div>
         <label>
-            Password:
+            Password:{' '}
             <input
+                type={user.showPassword ? "text" : "password"}
                 value={user.Password}
                 onChange={handlePasswordInput}
-            />
+            />{' '}
+            <input
+            type={"checkbox"}
+            checked={user.showPassword}
+            onChange={handleToggle}
+            />{' '}
+            Show Password
         </label>
+        </div>
 
-        <button type="submit">Login</button>
+        <div><button type="submit">Login</button></div>
 
     </form>
   );
