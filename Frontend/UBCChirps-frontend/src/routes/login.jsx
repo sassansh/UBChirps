@@ -1,4 +1,5 @@
 import {useState} from "react";
+import Navbar from "../components/navbar";
 
 export default function Login() {
 
@@ -35,7 +36,8 @@ export default function Login() {
         console.log("user trying to login");
     }
 
-    return (
+    return (<>
+    <Navbar/>
     <form onSubmit={handleSubmit}>
         <div>
         <h2>
@@ -73,5 +75,7 @@ export default function Login() {
         <div><button type="submit">Login</button></div>
 
     </form>
+    
+    </>
   );
 }

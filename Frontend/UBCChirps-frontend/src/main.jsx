@@ -9,6 +9,9 @@ import Root from "./routes/root.jsx";
 import UserPage from "./routes/users.jsx";
 import Login from "./routes/login.jsx";
 import Chirp from "./routes/chirp.jsx";
+import{
+  loader as chirpLoader,
+} from "./routes/users";
 
 const router = createBrowserRouter([
   {
@@ -17,8 +20,9 @@ const router = createBrowserRouter([
   },
   {
     // we will need logic here for giving a different page for every user
-    path: "/user",
+    path: "/user/:id",
     element: <UserPage/>,
+    loader: chirpLoader
   },
   {
     path: "/login",
