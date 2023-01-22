@@ -37,6 +37,7 @@ export default function Chirp() {
   return (
     <div>
       <h2>Chirp your message!</h2>
+
         <ChirpTextbox />
         <ChirpButton />
     </div>
