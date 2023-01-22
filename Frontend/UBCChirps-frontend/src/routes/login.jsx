@@ -1,5 +1,6 @@
 import {useState} from "react";
 import Navbar from "../components/navbar";
+import "../routes/login.css"
 
 export default function Login() {
 
@@ -8,6 +9,35 @@ export default function Login() {
         Password: '',
         showPassword: false,
     });
+
+    function UserNameField() {
+        return (
+            <input
+            value={user.Username}
+            onChange={handleNameInput}
+            />
+        );
+    }
+
+    function PasswordField() {
+        return(
+            <input
+                type={user.showPassword ? "text" : "password"}
+                value={user.Password}
+                onChange={handlePasswordInput}
+            />
+        );
+    }
+
+    function ShowPasswordToggle() {
+        return(
+            <input
+            type={"checkbox"}
+            checked={user.showPassword}
+            onChange={handleToggle}
+            />
+        );
+    }
 
     function handleNameInput(input){
         setUser({
@@ -46,28 +76,21 @@ export default function Login() {
         </div>
 
         <div>
-        <label>
+        <label
+        className={"user"}
+        >
             Username:{' '}
-            <input
-            value={user.Username}
-            onChange={handleNameInput}
-            />
+            <UserNameField />
         </label>
         </div>
 
         <div>
-        <label>
+        <label
+            className={"password"}
+        >
             Password:{' '}
-            <input
-                type={user.showPassword ? "text" : "password"}
-                value={user.Password}
-                onChange={handlePasswordInput}
-            />{' '}
-            <input
-            type={"checkbox"}
-            checked={user.showPassword}
-            onChange={handleToggle}
-            />{' '}
+            <PasswordField />{' '}
+            <ShowPasswordToggle />{' '}
             Show Password
         </label>
         </div>
