@@ -23,7 +23,8 @@ export async function getData(id) {
   //   }];
   // return fakeChirps;
   // await fakeNetwork(`contact:${id}`);
-  const posts = await fetch(`/getPostsByUser/?_googleid=${id}`);
+  const posts = await fetch(`localhost:8000/getPostsByUser/?_googleid=${id}`);
+  console.log(posts);
   return(posts ?? null);
 }
 
@@ -56,9 +57,13 @@ export default function UserPage() {
 function ChirpList(props) {
   return (
     <>
-      {props.chirps.map((x) => (
+      {
+      
+      props? props.chirps.map((x) => (
         <SingleChirp content={x.content} timestamp={x.date} />
-      ))}
+      )) : <></>
+      
+      }
     </>
   );
 }
