@@ -4,7 +4,7 @@ import './chirp.css';
 
 function ChirpButton() {
     return (
-        <button>Chirp</button>
+        <button className={'chirpButton'}>Chirp</button>
     );
 }
 
